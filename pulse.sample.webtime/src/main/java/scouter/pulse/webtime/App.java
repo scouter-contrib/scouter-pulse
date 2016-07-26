@@ -49,7 +49,6 @@ public class App
 				
 				public void run() {
 					sendCounterData();
-					
 					for (int i = 0; i < TARGET_SITES.length; i++) {
 		    			final String site = TARGET_SITES[i];
 		    			InternetObject obj = statusMap.get(site);
@@ -85,30 +84,44 @@ public class App
 				
 				private void sendCounterData() {
 					try {
-						JSONObject rootJson = new JSONObject();
-						JSONObject objectJson = new JSONObject();
-						rootJson.put("object", objectJson);
-						objectJson.put("host", InetAddress.getLocalHost().getHostName());
-						objectJson.put("name", "Google_Timer");
-						objectJson.put("type", "google");
-						objectJson.put("address", InetAddress.getLocalHost().getHostAddress());
-						
-						JSONArray countersArray = new JSONArray();
-						rootJson.put("counters", countersArray);
+						JSONArray jsonArray = new JSONArray();
 						for (String key : statusMap.keySet()) {
 							InternetObject obj = statusMap.get(key);
+							JSONObject element = null;
+							JSONObject objectJson = null;
+							JSONArray countersArray = null;
 							JSONObject counterJson = null;
 							switch (obj.status) {
 								case DONE:
+									element = new JSONObject();
+									objectJson = new JSONObject();
+									element.put("object", objectJson);
+									objectJson.put("host", InetAddress.getLocalHost().getHostName());
+									objectJson.put("name", key.substring(key.lastIndexOf("/") + 1));
+									objectJson.put("type", "website");
+									objectJson.put("address", InetAddress.getLocalHost().getHostAddress());
+									countersArray = new JSONArray();
+									element.put("counters", countersArray);
 									counterJson = new JSONObject();
-									counterJson.put("name",  key.substring(key.lastIndexOf("/") + 1));
+									counterJson.put("name",  "WebTime");
 									counterJson.put("value", obj.endTime - obj.startTime);
+									countersArray.put(counterJson);
 									obj.status = WebStatusEnum.READY;
 									break;
 								case ING:
+									element = new JSONObject();
+									objectJson = new JSONObject();
+									element.put("object", objectJson);
+									objectJson.put("host", InetAddress.getLocalHost().getHostName());
+									objectJson.put("name", key.substring(key.lastIndexOf("/") + 1));
+									objectJson.put("type", "website");
+									objectJson.put("address", InetAddress.getLocalHost().getHostAddress());
+									countersArray = new JSONArray();
+									element.put("counters", countersArray);
 									counterJson = new JSONObject();
-									counterJson.put("name",  key.substring(key.lastIndexOf("/") + 1));
+									counterJson.put("name",  "WebTime");
 									counterJson.put("value", System.currentTimeMillis() - obj.startTime);
+									countersArray.put(counterJson);
 									break;
 								case FAILED:
 									obj.status = WebStatusEnum.READY;
@@ -116,15 +129,15 @@ public class App
 								case READY:
 									break;
 							}
-							if (counterJson != null) {
-								countersArray.put(counterJson);
+							if (element != null) {
+								jsonArray.put(element);
 							}
 						}
 						
 						HttpResponse<JsonNode> response = Unirest.post("http://127.0.0.1:6180/counter")
 						    	.header("accept", "application/json")
 						    	.header("content-type", "application/json")
-						    	.body(rootJson).asJson();
+						    	.body(jsonArray).asJson();
 						
 					} catch (Exception e1) {
 						e1.printStackTrace();
@@ -138,18 +151,15 @@ public class App
     private static int registerMetadata() throws UnirestException {
     	JSONObject rootJson = new JSONObject();
     	JSONObject objectJson = new JSONObject();
-    	objectJson.put("type", "google");
-    	objectJson.put("display", "Google Webtime");
+    	objectJson.put("type", "website");
+    	objectJson.put("display", "WebSite");
     	rootJson.put("object", objectJson);
     	JSONArray counterArray = new JSONArray();
     	rootJson.put("counters", counterArray);
-    	for (int i = 0; i < TARGET_SITES.length; i++) {
-    		JSONObject counterMap = new JSONObject();
-    		counterArray.put(counterMap);
-    		String site = TARGET_SITES[i];
-    		counterMap.put("name", site.substring(site.lastIndexOf("/") + 1));
-    		counterMap.put("unit", "ms");
-    	}
+		JSONObject counterMap = new JSONObject();
+		counterArray.put(counterMap);
+		counterMap.put("name", "WebTime");
+		counterMap.put("unit", "ms");
     	
     	
     	HttpResponse<JsonNode> response = Unirest.post("http://127.0.0.1:6180/register")
