@@ -1,6 +1,6 @@
 package scouter.pulse.webtime;
 
-public class InternetObject {
+public class WebObject {
 	public String site;
 	WebStatusEnum status = WebStatusEnum.READY;
 	long startTime;
