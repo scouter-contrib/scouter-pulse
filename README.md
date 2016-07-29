@@ -64,6 +64,7 @@ Pulse is the platform for building lightweight agent program for many types of d
 	 ]
 	 ```
 
+4. Then you can see realtime data on scouter client
 
 
 
