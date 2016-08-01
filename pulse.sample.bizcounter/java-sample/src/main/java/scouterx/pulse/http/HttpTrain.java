@@ -4,6 +4,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 import scouterx.pulse.protocol.counter.ObjectCounterBean;
 import scouterx.pulse.protocol.register.RegisterBean;
+import scouterx.pulse.sample.bizcounter.App;
 
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
@@ -29,16 +30,16 @@ public class HttpTrain extends Thread {
 
     static BlockingQueue<Bucket> queue = new LinkedBlockingDeque<>(100);
 
-    //TODO 어찌 초기화 할까??
-    static Retrofit retrofit = new Retrofit.Builder()
-            .baseUrl("https://api.github.com/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build();
+    static Retrofit retrofit = null;
 
     private static HttpTrain instance = null;
 
     public final static synchronized HttpTrain getInstance() {
         if (instance == null) {
+            retrofit =new Retrofit.Builder()
+                    .baseUrl(App.targetAddress)
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build();
             instance = new HttpTrain();
             instance.setDaemon(true);
             instance.setName(instance.getClass().getName());
@@ -75,10 +76,12 @@ public class HttpTrain extends Thread {
     }
 
     public boolean putObjectCounterBeans(ObjectCounterBean[] beans) {
+        if(beans == null || beans.length == 0) return true;
         return queue.offer(new Bucket(TYPE_COUNTER_ARRAY, beans));
     }
 
     public boolean putObjectCounterBeans(List<ObjectCounterBean> beans) {
+        if(beans == null || beans.size() == 0) return true;
         return queue.offer(new Bucket(TYPE_COUNTER_LIST, beans));
     }
 

@@ -1,13 +1,37 @@
 package scouterx.pulse.sample.bizcounter;
 
+import org.apache.commons.cli.*;
+
 /**
  * @author Gun Lee (gunlee01@gmail.com) on 2016. 7. 30.
  */
 public class App {
-    public static void main(String[] args) {
+    public static String targetAddress = null;
 
-        BizSampleAgent agent = new BizSampleAgent();
-        agent.start();
+    public static void main(String[] args) {
+        Options options = new Options();
+
+        Option address = new Option("t", "target", true, "target address, default => http://localhost:6180/");
+        address.setRequired(false);
+        options.addOption(address);
+
+        CommandLineParser parser = new BasicParser();
+        HelpFormatter formatter = new HelpFormatter();
+        CommandLine cmd;
+
+        formatter.printHelp("options", options);
+
+        try{
+            cmd = parser.parse(options, args);
+        } catch(ParseException e) {
+            System.out.println(e.getMessage());
+            System.exit(1);
+            return;
+        }
+
+        App.targetAddress = cmd.getOptionValue("target", "http://localhost:6180/");
+
+        BizSampleAgent.getInstance().start();
 
         while(true) {
             try {
