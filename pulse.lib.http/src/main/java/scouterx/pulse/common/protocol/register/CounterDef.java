@@ -1,4 +1,4 @@
-package scouterx.pulse.protocol.register;
+package scouterx.pulse.common.protocol.register;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

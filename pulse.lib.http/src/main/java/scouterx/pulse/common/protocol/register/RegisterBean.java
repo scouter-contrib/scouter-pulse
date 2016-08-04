@@ -1,4 +1,4 @@
-package scouterx.pulse.protocol.register;
+package scouterx.pulse.common.protocol.register;
 
 import lombok.Data;
 
@@ -37,28 +37,3 @@ public class RegisterBean {
         }
     }
 }
-
-//{
-//        "object" : {
-//        "type" : "redis",
-//        "display" : "Redis"
-//        },
-//        "counters" : [
-//        {"name" : "aof_rewrite_scheduled",
-//        "unit" : "cnt",
-//        "display" : "AofRewriteScheduled",
-//        "total" : true,
-//        "all" : true
-//        },
-//        {"name" : "client_longest_output_list",
-//        "unit" : "cnt",
-//        "display" : "ClientLongOutList",
-//        },
-//        {"name" : "used_cpu_user",
-//        "unit" : "cnt",
-//        "display" : "UsedCpuUser",
-//        "total" : false
-//        },
-//        ]
-//        }
-

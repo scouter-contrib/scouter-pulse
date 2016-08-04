@@ -1,4 +1,4 @@
-package scouterx.pulse.protocol.counter;
+package scouterx.pulse.common.protocol.register;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CounterValue {
-    String name;
-    Number value;
+public class ObjectDef {
+    String type;
+    String display;
 }

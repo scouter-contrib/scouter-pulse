@@ -1,12 +1,12 @@
-package scouterx.pulse.http;
+package scouterx.pulse.common.http;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
-import scouterx.pulse.protocol.counter.ObjectCounterBean;
-import scouterx.pulse.protocol.register.RegisterBean;
+import scouterx.pulse.common.protocol.counter.ObjectCounterBean;
+import scouterx.pulse.common.protocol.register.RegisterBean;
 
 import java.util.List;
 import java.util.concurrent.BlockingQueue;
@@ -80,7 +80,7 @@ public class HttpTrain extends Thread {
     Callback callback = new Callback() {
         @Override
         public void onResponse(Call call, Response response) {
-            System.out.println("[SUCCESS]" + response.code());
+            //System.out.println("[SUCCESS]" + response.code());
         }
 
         @Override

@@ -1,7 +1,7 @@
 package scouterx.pulse.sample.bizcounter;
 
 import org.apache.commons.cli.*;
-import scouterx.pulse.http.HttpTrain;
+import scouterx.pulse.common.http.HttpTrain;
 
 /**
  * @author Gun Lee (gunlee01@gmail.com) on 2016. 7. 30.

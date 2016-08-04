@@ -1,4 +1,4 @@
-package scouterx.pulse.protocol.counter;
+package scouterx.pulse.common.protocol.counter;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

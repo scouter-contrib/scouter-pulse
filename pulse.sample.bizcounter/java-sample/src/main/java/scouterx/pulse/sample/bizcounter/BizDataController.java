@@ -1,8 +1,8 @@
 package scouterx.pulse.sample.bizcounter;
 
-import scouterx.pulse.protocol.counter.CounterValue;
-import scouterx.pulse.protocol.counter.ObjectCounterBean;
-import scouterx.pulse.protocol.counter.ObjectValue;
+import scouterx.pulse.common.protocol.counter.CounterValue;
+import scouterx.pulse.common.protocol.counter.ObjectCounterBean;
+import scouterx.pulse.common.protocol.counter.ObjectValue;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -31,7 +31,7 @@ public class BizDataController {
 
         prev.put("onairopm", 700f);
         prev.put("onairapm", 200f);
-        prev.put("onaircpm", 34.5f);
+        prev.put("onairosr", 31.5f);
     }
 
     public List<ObjectCounterBean> getRealtimeOrderInfoAsObjectCounterBean() {
@@ -62,7 +62,7 @@ public class BizDataController {
                 .setObject(new ObjectValue("onair-info", "onair", BizSampleAgent.OBJECT_TYPE, "noaddress"))
                 .addCounterValue(new CounterValue(BizSampleAgent.COUNTER_ONAIROPM, getRandomSample("onairopm")))
                 .addCounterValue(new CounterValue(BizSampleAgent.COUNTER_ONAIRAPM, getRandomSample("onairapm")))
-                .addCounterValue(new CounterValue(BizSampleAgent.COUNTER_ONAIROSR, getRandomSample("onaircpm")))
+                .addCounterValue(new CounterValue(BizSampleAgent.COUNTER_ONAIROSR, getRandomSampleRate("onairosr")))
                 .build());
 
         return list;
@@ -81,6 +81,29 @@ public class BizDataController {
             value = value + ((float) Math.random() - 0.3f) * value / 10;
         } else {
             value = value + ((float) Math.random() - 0.5f) * value / 5;
+        }
+
+        prev.put(type, value);
+
+        return value;
+    }
+
+    private float getRandomSampleRate(String type) {
+        Float value = prev.get(type);
+        if (value == null) {
+            value = 10.0f;
+            prev.put(type, value);
+        }
+
+        if(value <= 20) {
+            value = value + ((float) Math.random() - 0.1f) * value / 20;
+        } else if(value <= 50) {
+            value = value + ((float) Math.random() - 0.3f) * value / 10;
+        } else {
+            value = value + ((float) Math.random() - 0.5f) * value / 5;
+        }
+        if(value >= 90) {
+            value = 87.5f;
         }
 
         prev.put(type, value);

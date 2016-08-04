@@ -1,9 +1,9 @@
 package scouterx.pulse.sample.bizcounter;
 
-import scouterx.pulse.http.HttpTrain;
-import scouterx.pulse.protocol.register.CounterDef;
-import scouterx.pulse.protocol.register.ObjectDef;
-import scouterx.pulse.protocol.register.RegisterBean;
+import scouterx.pulse.common.http.HttpTrain;
+import scouterx.pulse.common.protocol.register.CounterDef;
+import scouterx.pulse.common.protocol.register.ObjectDef;
+import scouterx.pulse.common.protocol.register.RegisterBean;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;

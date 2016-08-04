@@ -1,11 +1,11 @@
-package scouterx.pulse.http;
+package scouterx.pulse.common.http;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
-import scouterx.pulse.protocol.counter.ObjectCounterBean;
-import scouterx.pulse.protocol.register.RegisterBean;
+import scouterx.pulse.common.protocol.counter.ObjectCounterBean;
+import scouterx.pulse.common.protocol.register.RegisterBean;
 
 import java.util.List;
 
