@@ -1,6 +1,7 @@
 package scouterx.pulse.sample.bizcounter;
 
 import org.apache.commons.cli.*;
+import scouterx.pulse.http.HttpTrain;
 
 /**
  * @author Gun Lee (gunlee01@gmail.com) on 2016. 7. 30.
@@ -11,7 +12,7 @@ public class App {
     public static void main(String[] args) {
         Options options = new Options();
 
-        Option address = new Option("t", "target", true, "target address, default => http://localhost:6180/");
+        Option address = new Option("t", "target", true, "target address, default => " + HttpTrain.DEFAULT_TARGETADDR);
         address.setRequired(false);
         options.addOption(address);
 
@@ -28,8 +29,7 @@ public class App {
             System.exit(1);
             return;
         }
-
-        App.targetAddress = cmd.getOptionValue("target", "http://localhost:6180/");
+        System.setProperty(HttpTrain.ENV_KEY_TARGETADDR, cmd.getOptionValue("target", HttpTrain.DEFAULT_TARGETADDR));
 
         BizSampleAgent.getInstance().start();
 

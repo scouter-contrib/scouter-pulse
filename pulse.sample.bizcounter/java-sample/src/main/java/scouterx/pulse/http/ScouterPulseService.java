@@ -1,10 +1,10 @@
 package scouterx.pulse.http;
 
-import retrofit2.Response;
+import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.Headers;
 import retrofit2.http.POST;
-import scouterx.pulse.protocol.counter.ObjectValue;
+import scouterx.pulse.protocol.counter.ObjectCounterBean;
 import scouterx.pulse.protocol.register.RegisterBean;
 
 import java.util.List;
@@ -14,14 +14,14 @@ import java.util.List;
  */
 public interface ScouterPulseService {
     @POST("/register")
-    @Headers({"Accept: application/json", "Content-Yype: application/json"})
-    Response register(@Body RegisterBean bean);
+    @Headers({"accept: application/json", "content-type: application/json"})
+    Call<Void> register(@Body RegisterBean bean);
 
     @POST("/counter")
-    @Headers({"Accept: application/json", "Content-Yype: application/json"})
-    Response counter(@Body ObjectValue[] objs);
+    @Headers({"accept: application/json", "content-type: application/json"})
+    Call<Void> counter(@Body ObjectCounterBean[] objs);
 
     @POST("/counter")
-    @Headers({"Accept: application/json", "Content-Yype: application/json"})
-    Response counter(@Body List<ObjectValue> objs);
+    @Headers({"accept: application/json", "content-type: application/json"})
+    Call<Void> counter(@Body List<ObjectCounterBean> objs);
 }
