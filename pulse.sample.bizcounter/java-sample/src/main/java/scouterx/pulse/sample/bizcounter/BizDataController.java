@@ -118,7 +118,7 @@ public class BizDataController {
             prev.put(type, value);
         }
 
-        value = value + (float) Math.random() * value / 20;
+        value = value + (float) Math.random() * 30;
         prev2.put(type, value);
 
         return value;
