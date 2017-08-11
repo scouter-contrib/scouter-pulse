@@ -35,11 +35,12 @@ Pulse is the platform for building lightweight agent program for many types of d
 ```
 	
 3. Send object heartbeat and counter value by json periodically(recommended 2~5sec).
-  > http://server_ip:6180/counters
+  > http://server_ip:6180/counter
 
 ```
 
-	 {
+[ 
+	{
 		"object" : {
 		  "host" : "host1",
 			"name" : "name1",
@@ -65,7 +66,8 @@ Pulse is the platform for building lightweight agent program for many types of d
 			{"name" : "counter3", "value" : 8888}
 		]
 	 }
-	 
+]
+
  ```
 
 4. Then you can see realtime data on scouter client
