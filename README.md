@@ -35,7 +35,7 @@ Pulse is the platform for building lightweight agent program for many types of d
 ```
 	
 3. Send object heartbeat and counter value by json periodically(recommended 2~5sec).
-  > http://server_ip:6180/counters
+  > http://server_ip:6180/counter
 
 ```
 
