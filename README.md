@@ -39,7 +39,8 @@ Pulse is the platform for building lightweight agent program for many types of d
 
 ```
 
-	 {
+[ 
+	{
 		"object" : {
 		  "host" : "host1",
 			"name" : "name1",
@@ -65,7 +66,8 @@ Pulse is the platform for building lightweight agent program for many types of d
 			{"name" : "counter3", "value" : 8888}
 		]
 	 }
-	 
+]
+
  ```
 
 4. Then you can see realtime data on scouter client
